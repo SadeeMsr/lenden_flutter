@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lenden/views/permissions-views/EmailUsage.views.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -6,7 +7,11 @@ void main() {
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),
-    home: const MyHomePage(),
+    // home: const MyHomePage(),
+    // home: const EmailUsage(),
+    routes: {
+      '/': (context) => EmailUsage(),
+    },
   ));
 }
 
