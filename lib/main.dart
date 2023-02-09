@@ -17,7 +17,10 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lenden'),
+        centerTitle: true,
+        title: const Text('Lenden',
+            style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
+        backgroundColor: Colors.blueAccent,
       ),
     );
   }
