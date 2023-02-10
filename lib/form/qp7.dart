@@ -12,7 +12,7 @@ class Qp7State extends State<Qp7> {
   var _home = 0;
   var _vacation = 0;
   var _entertaiment = 0;
-
+//Home -----------------------------------------------------------------------------------------------
   Widget HomeBox() => Container(
         width: double.infinity,
         height: 80.0,
@@ -29,7 +29,7 @@ class Qp7State extends State<Qp7> {
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           const Text(
-            "Health",
+            "Home",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
           Text('$_home',
@@ -69,7 +69,177 @@ class Qp7State extends State<Qp7> {
           ),
         ]),
       );
-
+//Health -----------------------------------------------------------------------------------------------
+  Widget HealthBox() => Container(
+        width: double.infinity,
+        height: 80.0,
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Color.fromARGB(255, 255, 254, 254),
+          boxShadow: const [
+            BoxShadow(
+                color: Color.fromARGB(255, 185, 212, 186), spreadRadius: 3),
+          ],
+        ),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          const Text(
+            "Health",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          Text('$_health',
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  if (_health > 0 && _health <= 10) {
+                    setState(() {
+                      _health--;
+                    });
+                  }
+                },
+                child: new Icon(Icons.remove),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              const Text("or"),
+              const SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  if (_health >= 0 && _health < 10) {
+                    setState(() {
+                      _health++;
+                    });
+                  }
+                },
+                child: new Icon(Icons.add),
+              )
+            ],
+          ),
+        ]),
+      );
+//Vacation -----------------------------------------------------------------------------------------------
+  Widget VacationBox() => Container(
+        width: double.infinity,
+        height: 80.0,
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Color.fromARGB(255, 255, 254, 254),
+          boxShadow: const [
+            BoxShadow(
+                color: Color.fromARGB(255, 185, 212, 186), spreadRadius: 3),
+          ],
+        ),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          const Text(
+            "Vacation",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          Text('$_vacation',
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  if (_vacation > 0 && _vacation <= 10) {
+                    setState(() {
+                      _vacation--;
+                    });
+                  }
+                },
+                child: new Icon(Icons.remove),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              const Text("or"),
+              const SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  if (_vacation >= 0 && _vacation < 10) {
+                    setState(() {
+                      _vacation++;
+                    });
+                  }
+                },
+                child: new Icon(Icons.add),
+              )
+            ],
+          ),
+        ]),
+      );
+//Entertainment -----------------------------------------------------------------------------------------------
+  Widget EntertainmentBox() => Container(
+        width: double.infinity,
+        height: 80.0,
+        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Color.fromARGB(255, 255, 254, 254),
+          boxShadow: const [
+            BoxShadow(
+                color: Color.fromARGB(255, 185, 212, 186), spreadRadius: 3),
+          ],
+        ),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          const Text(
+            "Entertainment",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+          Text('$_entertaiment',
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  if (_entertaiment > 0 && _entertaiment <= 10) {
+                    setState(() {
+                      _entertaiment--;
+                    });
+                  }
+                },
+                child: new Icon(Icons.remove),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              const Text("or"),
+              const SizedBox(
+                width: 10,
+              ),
+              FloatingActionButton(
+                onPressed: () {
+                  if (_entertaiment >= 0 && _entertaiment < 10) {
+                    setState(() {
+                      _entertaiment++;
+                    });
+                  }
+                },
+                child: new Icon(Icons.add),
+              )
+            ],
+          ),
+        ]),
+      );
   Widget titleSection = Container(
     padding: const EdgeInsets.all(20),
     child: Row(
@@ -130,9 +300,9 @@ class Qp7State extends State<Qp7> {
         titleSection,
         textSection,
         HomeBox(),
-        // box("Health", _health),
-        // box("Vacation", _vacation),
-        // box("Entertainment", _entertaiment),
+        HealthBox(),
+        VacationBox(),
+        EntertainmentBox(),
         Container(
           //apply margin and padding using Container Widget.
           padding: const EdgeInsets.all(25), //You can use EdgeInsets like above
