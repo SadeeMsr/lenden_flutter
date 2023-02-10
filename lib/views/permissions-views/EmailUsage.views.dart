@@ -47,7 +47,7 @@ class EmailUsageState extends State<EmailUsage> {
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     foregroundColor: Colors.black87,
-    backgroundColor: Color.fromARGB(255, 163, 195, 227),
+    backgroundColor: const Color.fromARGB(255, 163, 195, 227),
     minimumSize: const Size(150, 44),
     padding: const EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
