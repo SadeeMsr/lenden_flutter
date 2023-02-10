@@ -13,14 +13,14 @@ class Qp7State extends State<Qp7> {
   var _vacation = 0;
   var _entertaiment = 0;
 //Home -----------------------------------------------------------------------------------------------
-  Widget HomeBox() => Container(
+  Widget homeBox() => Container(
         width: double.infinity,
         height: 80.0,
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Color.fromARGB(255, 255, 254, 254),
+          color: const Color.fromARGB(255, 255, 254, 254),
           boxShadow: const [
             BoxShadow(
                 color: Color.fromARGB(255, 185, 212, 186), spreadRadius: 3),
@@ -46,7 +46,7 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: new Icon(Icons.remove),
+                child: Icon(Icons.remove),
               ),
               const SizedBox(
                 width: 10,
@@ -70,14 +70,14 @@ class Qp7State extends State<Qp7> {
         ]),
       );
 //Health -----------------------------------------------------------------------------------------------
-  Widget HealthBox() => Container(
+  Widget healthBox() => Container(
         width: double.infinity,
         height: 80.0,
         padding: const EdgeInsets.all(10),
         margin: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Color.fromARGB(255, 255, 254, 254),
+          color: const Color.fromARGB(255, 255, 254, 254),
           boxShadow: const [
             BoxShadow(
                 color: Color.fromARGB(255, 185, 212, 186), spreadRadius: 3),
@@ -103,7 +103,7 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: new Icon(Icons.remove),
+                child: const Icon(Icons.remove),
               ),
               const SizedBox(
                 width: 10,
@@ -127,7 +127,7 @@ class Qp7State extends State<Qp7> {
         ]),
       );
 //Vacation -----------------------------------------------------------------------------------------------
-  Widget VacationBox() => Container(
+  Widget vacationBox() => Container(
         width: double.infinity,
         height: 80.0,
         padding: const EdgeInsets.all(10),
@@ -184,7 +184,7 @@ class Qp7State extends State<Qp7> {
         ]),
       );
 //Entertainment -----------------------------------------------------------------------------------------------
-  Widget EntertainmentBox() => Container(
+  Widget entertainmentBox() => Container(
         width: double.infinity,
         height: 80.0,
         padding: const EdgeInsets.all(10),
@@ -234,7 +234,7 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: new Icon(Icons.add),
+                child: Icon(Icons.add),
               )
             ],
           ),
@@ -299,17 +299,39 @@ class Qp7State extends State<Qp7> {
       body: Column(children: [
         titleSection,
         textSection,
-        HomeBox(),
-        HealthBox(),
-        VacationBox(),
-        EntertainmentBox(),
+        homeBox(),
+        healthBox(),
+        vacationBox(),
+        entertainmentBox(),
         Container(
           //apply margin and padding using Container Widget.
           padding: const EdgeInsets.all(25), //You can use EdgeInsets like above
           margin: const EdgeInsets.all(5),
           child: ElevatedButton(
             style: raisedButtonStyle,
-            onPressed: () {},
+            onPressed: () {
+              if (_entertaiment + _health + _home + _vacation <= 10) {
+                //Code to change screen
+              } else {
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('Alert'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    content: const Text(
+                        'Make sure the coins alloted add up to 10 or less'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
             child: const Text('Next'),
           ),
         ),
