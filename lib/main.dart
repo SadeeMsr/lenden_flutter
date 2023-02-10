@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lenden/views/permissions-views/PhoneData.views.dart';
+// import 'package:lenden/views/permissions-views/AppUsage.views.dart';
+import 'package:lenden/views/survey-views/Survey.views.dart';
+// import 'package:lenden/views/permissions-views/PhoneData.views.dart';
 // import 'package:lenden/views/permissions-views/EmailUsage.views.dart';
 
 void main() {
@@ -9,11 +11,15 @@ void main() {
     ),
     routes: {
       // '/': (context) => const EmailUsage(),
-      '/': (context) => const PhoneData()
+      // '/': (context) => const PhoneData(),
+      // '/': (context) => const AppUsage(),
+      '/': (context) => const Survey(),
     },
     debugShowCheckedModeBanner: false,
   ));
 }
+
+
 
 // class MyHomePage extends StatelessWidget {
 //   const MyHomePage({super.key});
