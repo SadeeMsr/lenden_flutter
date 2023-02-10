@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class EmailUsage extends StatefulWidget {
-  const EmailUsage({super.key});
+class PhoneData extends StatefulWidget {
+  const PhoneData({super.key});
 
   @override
-  State<EmailUsage> createState() => _EmailUsageState();
+  State<PhoneData> createState() => _PhoneDataState();
 }
 
-class _EmailUsageState extends State<EmailUsage> {
+class _PhoneDataState extends State<PhoneData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +24,7 @@ class _EmailUsageState extends State<EmailUsage> {
           )),
           const Center(
             child: Text(
-              'Email Usage',
+              'Phone Data',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
@@ -35,6 +35,15 @@ class _EmailUsageState extends State<EmailUsage> {
           const Center(
             child: Text(
                 'This sections asks for permission to access your email activity? This will allow us to better understand your communication patterns and help us provide more personalized and efficient support. Rest assured that your privacy will be fully respected and all information will be kept confidential. Please let us know if you have any concerns or questions before granting access.',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 87, 85, 86),
+                  decorationThickness: 2.85,
+                ),
+                textAlign: TextAlign.justify),
+          ),
+          const Center(
+            child: Text(
+                'Rest assured that your privacy will be fully respected and all information will be kept confidential. Please let us know if you have any concerns or questions before granting access.',
                 style: TextStyle(
                   color: Color.fromARGB(255, 87, 85, 86),
                   decorationThickness: 2.85,
