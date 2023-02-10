@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lenden/views/permissions-views/EmailUsage.views.dart';
+import 'package:lenden/form/qp7.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -10,7 +11,7 @@ void main() {
     // home: const MyHomePage(),
     // home: const EmailUsage(),
     routes: {
-      '/': (context) => const EmailUsage(),
+      '/': (context) => const Qp7(),
     },
     debugShowCheckedModeBanner: false,
   ));
