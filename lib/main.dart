@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lenden/views/permissions-views/EmailUsage.views.dart';
 import 'package:lenden/form/qp7.dart';
+import 'package:lenden/views/permissions-views/PhoneData.views.dart';
+// import 'package:lenden/views/permissions-views/EmailUsage.views.dart';
 
 void main() {
   runApp(MaterialApp(
-    title: 'Flutter Demo',
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),
-    // home: const MyHomePage(),
-    // home: const EmailUsage(),
     routes: {
       '/': (context) => const Qp7(),
     },
