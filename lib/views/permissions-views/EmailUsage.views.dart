@@ -1,4 +1,19 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:http/http.dart' as http;
+
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+    'https://mail.google.com/'
+  ],
+);
 
 class EmailUsage extends StatefulWidget {
   const EmailUsage({super.key});
@@ -8,6 +23,129 @@ class EmailUsage extends StatefulWidget {
 }
 
 class EmailUsageState extends State<EmailUsage> {
+//-----------------Email data retrieval------------------------------------------------
+  GoogleSignInAccount? _currentUser;
+  String _contactText = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
+      setState(() {
+        _currentUser = account;
+      });
+      if (_currentUser != null) {
+        _handleGetEmail(_currentUser!);
+      }
+    });
+    _googleSignIn.signInSilently();
+  }
+
+  Future<void> _handleGetEmail(GoogleSignInAccount user) async {
+    //Getting todays date ------------------
+    DateTime now = DateTime.now();
+    var date = now.day;
+    var month = now.month;
+    var year = now.year;
+
+    final http.Response profileData = await http.get(
+      Uri.parse('https://gmail.googleapis.com/gmail/v1/users/me/profile'),
+      headers: await user.authHeaders,
+    );
+
+    final Map<String, dynamic> pData =
+        json.decode(profileData.body) as Map<String, dynamic>;
+
+    var userId = pData["emailAddress"];
+
+    final http.Response response = await http.get(
+      Uri.parse(
+          'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&q="in:sent after:2019/01/01 before:$year/$month/$date'),
+      headers: await user.authHeaders,
+    );
+
+    Map<String, dynamic> data =
+        json.decode(response.body) as Map<String, dynamic>;
+
+    var pgToken = data["nextPageToken"];
+    // data.addEntries()
+
+    if (pgToken != null) {
+      while (pgToken != null && data["messages"].length < 2000) {
+        http.Response respo = await http.get(
+          Uri.parse(
+              'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&pageToken=$pgToken&q="in:sent after:2019/01/01 before:$year/$month/$date'),
+          headers: await user.authHeaders,
+        );
+        Map<String, dynamic> tempdata =
+            json.decode(respo.body) as Map<String, dynamic>;
+        data.addAll(tempdata);
+        pgToken = tempdata["nextPageToken"];
+      }
+    }
+
+    for (int i = 218; i < data["messages"].length; i++) {
+      var emId = data["messages"][i]["id"];
+
+      http.Response emailMsg = await http.get(
+        Uri.parse(
+            'https://gmail.googleapis.com/gmail/v1/users/me/messages/$emId'),
+        headers: await user.authHeaders,
+      );
+
+      final Map<String, dynamic> emailData =
+          json.decode(emailMsg.body) as Map<String, dynamic>;
+
+      var body = json.encode({'userId': userId, 'email_log': emailData});
+
+      var url = Uri.parse('http://127.0.0.1:8000/addEmailData/');
+
+      try {
+        var resp = await http
+            .post(url,
+                headers: {"Content-Type": "application/json"}, body: body)
+            .catchError((_) => print('Logging message failed'));
+      } on SocketException {
+        print("error on $i");
+        continue;
+      }
+      print(i);
+    }
+    print("finished");
+
+    // var emId = data["messages"][0]["id"];
+
+    // final http.Response emailMsg = await http.get(
+    //   Uri.parse(
+    //       'https://gmail.googleapis.com/gmail/v1/users/me/messages/$emId'),
+    //   headers: await user.authHeaders,
+    // );
+
+    // final Map<String, dynamic> emailData =
+    //     json.decode(emailMsg.body) as Map<String, dynamic>;
+
+    // print(emailData);
+
+    // var body = json.encode({'userId': userId, 'email_log': emailData});
+
+    // var url = Uri.parse('http://127.0.0.1:8000/addEmailData/');
+
+    // var resp = await http.post(url,
+    //     headers: {"Content-Type": "application/json"}, body: body);
+
+    // print(resp.statusCode);
+    // _googleSignIn.disconnect();
+  }
+
+  Future<void> _handleSignIn() async {
+    try {
+      await _googleSignIn.signIn();
+    } catch (error) {
+      print(error);
+    }
+  }
+
+//-----------------others---------------------------------------------------------------
   Widget titleSection = Container(
     padding: const EdgeInsets.all(10),
     child: Row(
@@ -57,6 +195,7 @@ class EmailUsageState extends State<EmailUsage> {
 
   @override
   Widget build(BuildContext context) {
+    final GoogleSignInAccount? user = _currentUser;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -70,16 +209,20 @@ class EmailUsageState extends State<EmailUsage> {
             height: 300.00,
             child: Image(image: AssetImage("assets/email.jpg"))),
         titleSection,
-        textSection,
+        // textSection,
         Container(
           //apply margin and padding using Container Widget.
           padding: const EdgeInsets.all(25), //You can use EdgeInsets like above
           margin: const EdgeInsets.all(5),
           child: ElevatedButton(
             style: raisedButtonStyle,
-            onPressed: () {},
+            onPressed: _handleSignIn,
             child: const Text('Give Permission'),
           ),
+        ),
+        ElevatedButton(
+          child: const Text('REFRESH'),
+          onPressed: () => _handleGetEmail(user!),
         ),
       ]),
     );
