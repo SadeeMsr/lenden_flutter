@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:lenden/views/permissions-views/EmailUsage.views.dart';
 import 'package:lenden/form/qp7.dart';
-// import 'package:lenden/views/permissions-views/AppUsage.views.dart';
+import 'navigation/RouteGenerator.utils.dart';
 import 'package:lenden/views/survey-views/Survey.views.dart';
-// import 'package:lenden/views/permissions-views/PhoneData.views.dart';
-// import 'package:lenden/views/permissions-views/EmailUsage.views.dart';
 
 void main() {
   runApp(MaterialApp(
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),
-    routes: {
-      // '/': (context) => const Qp7(),,
-      // '/': (context) => const AppUsage(),
-      '/': (context) => const Survey(),
-    },
+    initialRoute: '/',
+    onGenerateRoute: RouteGenerator.generateRoute,
     debugShowCheckedModeBanner: false,
   ));
 }

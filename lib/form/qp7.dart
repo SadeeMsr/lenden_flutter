@@ -331,6 +331,9 @@ class Qp7State extends State<Qp7> {
                   ),
                 );
               }
+              Navigator.of(context).pushNamed(
+                '/survey',
+              );
             },
             child: const Text('Next'),
           ),

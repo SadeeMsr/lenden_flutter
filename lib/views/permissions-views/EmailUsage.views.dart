@@ -58,30 +58,64 @@ class EmailUsageState extends State<EmailUsage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('Lenden',
-            style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
-        backgroundColor: const Color.fromARGB(255, 66, 87, 123),
-      ),
-      body: Column(children: [
-        const SizedBox(
-            width: double.infinity,
-            height: 300.00,
-            child: Image(image: AssetImage("assets/email.jpg"))),
-        titleSection,
-        textSection,
-        Container(
-          //apply margin and padding using Container Widget.
-          padding: const EdgeInsets.all(25), //You can use EdgeInsets like above
-          margin: const EdgeInsets.all(5),
-          child: ElevatedButton(
-            style: raisedButtonStyle,
-            onPressed: () {},
-            child: const Text('Give Permission'),
+        body: Padding(
+      padding: const EdgeInsets.fromLTRB(25, 40, 25, 30),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const ButtonBar(),
+          Center(
+              child: Image.asset(
+            'assets/images/gmail.png',
+            height: 300,
+            width: 300,
+          )),
+          const Center(
+            child: Text(
+              'Email Usage',
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  color: Color.fromARGB(255, 55, 63, 98)),
+              textAlign: TextAlign.center,
+            ),
           ),
-        ),
-      ]),
-    );
+          const Center(
+            child: Text(
+                'This sections asks for permission to access your email activity? This will allow us to better understand your communication patterns and help us provide more personalized and efficient support. Rest assured that your privacy will be fully respected and all information will be kept confidential. Please let us know if you have any concerns or questions before granting access.',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 87, 85, 86),
+                  decorationThickness: 2.85,
+                ),
+                textAlign: TextAlign.justify),
+          ),
+          const Center(
+            child: Text(
+                'Rest assured that your privacy will be fully respected and all information will be kept confidential. Please let us know if you have any concerns or questions before granting access.',
+                style: TextStyle(
+                  color: Color.fromARGB(255, 87, 85, 86),
+                  decorationThickness: 2.85,
+                ),
+                textAlign: TextAlign.justify),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            child: Center(
+              child: FilledButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                      '/AppUsage',
+                      arguments:
+                          'Soyef, App usage a data emne routing diya pathailam dekh',
+                    );
+                  },
+                  style: FilledButton.styleFrom(
+                      backgroundColor: Color.fromARGB(188, 37, 51, 94)),
+                  child: const Text('Give permissions')),
+            ),
+          )
+        ],
+      ),
+    ));
   }
 }

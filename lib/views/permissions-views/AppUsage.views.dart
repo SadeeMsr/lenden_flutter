@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppUsage extends StatefulWidget {
-  const AppUsage({super.key});
+  final String data;
+
+  const AppUsage({Key? key, required this.data}) : super(key: key);
 
   @override
   State<AppUsage> createState() => _AppUsageState();
@@ -22,10 +24,10 @@ class _AppUsageState extends State<AppUsage> {
             height: 300,
             width: 300,
           )),
-          const Center(
+          Center(
             child: Text(
-              'App Usage',
-              style: TextStyle(
+              widget.data,
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
                   color: Color.fromARGB(255, 55, 63, 98)),
@@ -54,7 +56,13 @@ class _AppUsageState extends State<AppUsage> {
             padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
             child: Center(
               child: FilledButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                      '/phoneData',
+                      arguments:
+                          'Soyef, App usage a data emne routing diya pathailam dekh',
+                    );
+                  },
                   style: FilledButton.styleFrom(
                       backgroundColor: Color.fromARGB(188, 37, 51, 94)),
                   child: const Text('Give permissions')),
