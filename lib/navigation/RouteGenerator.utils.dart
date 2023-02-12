@@ -9,7 +9,6 @@ import '../form/qp7.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    // Getting arguments passed in while calling Navigator.pushNamed
     final args = settings.arguments;
 
     switch (settings.name) {
@@ -18,6 +17,7 @@ class RouteGenerator {
           builder: (_) => EmailUsage(),
         );
       case '/AppUsage':
+        //eine emne conditon diya diya validation korte hoy bujsos???
         if (args is String) {
           return MaterialPageRoute(
               builder: (_) => AppUsage(
