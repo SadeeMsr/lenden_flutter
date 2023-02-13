@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lenden/main.dart';
 import 'package:lenden/views/permissions-views/AppUsage.views.dart';
 import 'package:lenden/views/permissions-views/EmailUsage.views.dart';
+import 'package:lenden/views/permissions-views/ImageQues.views.dart';
 import 'package:lenden/views/permissions-views/PhoneData.views.dart';
 import 'package:lenden/views/survey-views/Survey.views.dart';
 
@@ -29,6 +30,11 @@ class RouteGenerator {
       case '/phoneData':
         return MaterialPageRoute(
           builder: (_) => PhoneData(),
+        );
+
+      case '/imageQues':
+        return MaterialPageRoute(
+          builder: (_) => ImageQues(),
         );
 
       case '/quesSeven':
