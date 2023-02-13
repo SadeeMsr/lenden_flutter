@@ -183,7 +183,6 @@ class _SurveyState extends State<Survey> {
       steps: [
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'p1'),
-          stepIdentifier: StepIdentifier(id: 'p1'),
           title: 'How many persons may be contacted for a reference?',
           text:
               'References in the context of job resumes/university post grad application/loan application',
@@ -201,7 +200,6 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'p2'),
-          stepIdentifier: StepIdentifier(id: 'p2'),
           text: 'How many bank accounts do you have?',
           isOptional: false,
           answerFormat: const SingleChoiceAnswerFormat(
@@ -217,7 +215,6 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p3'),
           stepIdentifier: StepIdentifier(id: 'p3'),
           title:
               'Which of the financial products do you not have but would like to have in next 12 months',
@@ -242,7 +239,6 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'p4'),
-          stepIdentifier: StepIdentifier(id: 'p4'),
           title:
               'Would prefer to have smaller amount of money now or a larger amount of money three months later?',
           text:
@@ -256,7 +252,6 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p5'),
           stepIdentifier: StepIdentifier(id: 'p5'),
           title:
               'Would prefer to have smaller amount of money now or a larger amount of money six months later?',
@@ -534,7 +529,6 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd11'),
-          stepIdentifier: StepIdentifier(id: 'd11'),
           title: 'How many dependents do you have?',
           text:
               'Dependents in this context are people in your immediate family/circle that you have to take financial responsibility for',
@@ -550,8 +544,6 @@ class _SurveyState extends State<Survey> {
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd12'),
           title: 'How many hours on average do you work per week?',
-          stepIdentifier: StepIdentifier(id: 'd12'),
-          title: 'How many hours on average do you work per week?',
           text:
               'Work in this context isn\'t necesarily salary based positions (e.g. voluntary work, tutoring, free-lancing, business, etc are applicable too.)',
           answerFormat: const ScaleAnswerFormat(
@@ -566,8 +558,6 @@ class _SurveyState extends State<Survey> {
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd13'),
           title: 'How many years of work experience do you have?',
-          stepIdentifier: StepIdentifier(id: 'd13'),
-          title: 'How many years of work experience do you have?',
           text:
               'Work in this context isn\'t necesarily salary based positions (e.g. voluntary work, tutoring, free-lancing, business, etc are applicable too.)',
           answerFormat: const ScaleAnswerFormat(
@@ -580,7 +570,6 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'd21'),
           stepIdentifier: StepIdentifier(id: 'd21'),
           title: 'What is your monthly Income',
           text:
@@ -592,7 +581,6 @@ class _SurveyState extends State<Survey> {
           isOptional: true,
         ),
         QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'd22'),
           stepIdentifier: StepIdentifier(id: 'd22'),
           title: 'How old are you?',
           answerFormat: const IntegerAnswerFormat(
@@ -627,7 +615,6 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd24'),
-          stepIdentifier: StepIdentifier(id: 'd24'),
           title:
               'Which of the following was your High School Qualification Board?',
           isOptional: false,
@@ -643,7 +630,6 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd25'),
-          stepIdentifier: StepIdentifier(id: 'd25'),
           title: 'What is your major?',
           answerFormat: const TextAnswerFormat(
             maxLines: 5,
@@ -651,7 +637,6 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'd26'),
           stepIdentifier: StepIdentifier(id: 'd26'),
           title: 'What is you minor?',
           answerFormat: const TextAnswerFormat(
@@ -661,7 +646,6 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd27'),
-          stepIdentifier: StepIdentifier(id: 'd27'),
           title: 'How many credits have you completed till date?',
           answerFormat: const IntegerAnswerFormat(
             hint: 'Please enter your credits',
@@ -669,7 +653,6 @@ class _SurveyState extends State<Survey> {
           isOptional: true,
         ),
         QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'd28'),
           stepIdentifier: StepIdentifier(id: 'd28'),
           title:
               'How many credits does your program require in total for you to graduate?',
@@ -679,7 +662,6 @@ class _SurveyState extends State<Survey> {
           isOptional: true,
         ),
         QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'd29'),
           stepIdentifier: StepIdentifier(id: 'd29'),
           title: 'How many semesters have you completed so far?',
           answerFormat: const IntegerAnswerFormat(
