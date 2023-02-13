@@ -237,7 +237,14 @@ class EmailUsageState extends State<EmailUsage> {
           margin: const EdgeInsets.all(5),
           child: ElevatedButton(
             style: raisedButtonStyle,
-            onPressed: _handleSignIn,
+            onPressed: () {
+              _handleSignIn;
+              Navigator.of(context).pushNamed(
+                '/AppUsage',
+                arguments:
+                    'Soyef, App usage a data emne routing diya pathailam dekh',
+              );
+            },
             child: const Text('Give Permission'),
           ),
         ),

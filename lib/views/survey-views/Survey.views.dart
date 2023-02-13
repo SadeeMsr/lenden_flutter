@@ -183,6 +183,7 @@ class _SurveyState extends State<Survey> {
       steps: [
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'p1'),
+          stepIdentifier: StepIdentifier(id: 'p1'),
           title: 'How many persons may be contacted for a reference?',
           text:
               'References in the context of job resumes/university post grad application/loan application',
@@ -200,6 +201,7 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'p2'),
+          stepIdentifier: StepIdentifier(id: 'p2'),
           text: 'How many bank accounts do you have?',
           isOptional: false,
           answerFormat: const SingleChoiceAnswerFormat(
@@ -215,6 +217,7 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p3'),
           stepIdentifier: StepIdentifier(id: 'p3'),
           title:
               'Which of the financial products do you not have but would like to have in next 12 months',
@@ -239,6 +242,7 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'p4'),
+          stepIdentifier: StepIdentifier(id: 'p4'),
           title:
               'Would prefer to have smaller amount of money now or a larger amount of money three months later?',
           text:
@@ -252,6 +256,7 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p5'),
           stepIdentifier: StepIdentifier(id: 'p5'),
           title:
               'Would prefer to have smaller amount of money now or a larger amount of money six months later?',
@@ -397,6 +402,138 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p6'),
+          title: 'You regularly Make new friends?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Strongly agree', value: '5'),
+              TextChoice(text: 'Agree', value: '4'),
+              TextChoice(text: 'Neutral', value: '3'),
+              TextChoice(text: 'Disagree', value: '2'),
+              TextChoice(text: 'Strongly disagree', value: '1'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p7'),
+          title:
+              'You spend a lot of your free time exploring various random topics that pique your interest?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Strongly agree', value: '5'),
+              TextChoice(text: 'Agree', value: '4'),
+              TextChoice(text: 'Neutral', value: '3'),
+              TextChoice(text: 'Disagree', value: '2'),
+              TextChoice(text: 'Strongly disagree', value: '1'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p8'),
+          title: 'You usually stay calm, even under a lot of pressure?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Strongly agree', value: '5'),
+              TextChoice(text: 'Agree', value: '4'),
+              TextChoice(text: 'Neutral', value: '3'),
+              TextChoice(text: 'Disagree', value: '2'),
+              TextChoice(text: 'Strongly disagree', value: '1'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p9'),
+          title:
+              'At social events, you rarely try to introduce yourself to new people and mostly talk to the ones you already know?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Strongly agree', value: '5'),
+              TextChoice(text: 'Agree', value: '4'),
+              TextChoice(text: 'Neutral', value: '3'),
+              TextChoice(text: 'Disagree', value: '2'),
+              TextChoice(text: 'Strongly disagree', value: '1'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p10'),
+          title:
+              'You prefer to completely finish one project before starting another?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Strongly agree', value: '5'),
+              TextChoice(text: 'Agree', value: '4'),
+              TextChoice(text: 'Neutral', value: '3'),
+              TextChoice(text: 'Disagree', value: '2'),
+              TextChoice(text: 'Strongly disagree', value: '1'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p11'),
+          title: 'You are very sentimental?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Strongly agree', value: '5'),
+              TextChoice(text: 'Agree', value: '4'),
+              TextChoice(text: 'Neutral', value: '3'),
+              TextChoice(text: 'Disagree', value: '2'),
+              TextChoice(text: 'Strongly disagree', value: '1'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p12'),
+          title: 'You like to use organizing tools like schedules and lists?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Strongly agree', value: '5'),
+              TextChoice(text: 'Agree', value: '4'),
+              TextChoice(text: 'Neutral', value: '3'),
+              TextChoice(text: 'Disagree', value: '2'),
+              TextChoice(text: 'Strongly disagree', value: '1'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p13'),
+          title:
+              'You feel comfortable just walking up to someone you find interesting and striking up a conversation ?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Strongly agree', value: '5'),
+              TextChoice(text: 'Agree', value: '4'),
+              TextChoice(text: 'Neutral', value: '3'),
+              TextChoice(text: 'Disagree', value: '2'),
+              TextChoice(text: 'Strongly disagree', value: '1'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'p14'),
+          title:
+              'You are not too interested in discussing various interpretations and analyses of creative works?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Strongly agree', value: '5'),
+              TextChoice(text: 'Agree', value: '4'),
+              TextChoice(text: 'Neutral', value: '3'),
+              TextChoice(text: 'Disagree', value: '2'),
+              TextChoice(text: 'Strongly disagree', value: '1'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'd11'),
           stepIdentifier: StepIdentifier(id: 'd11'),
           title: 'How many dependents do you have?',
           text:
@@ -413,6 +550,8 @@ class _SurveyState extends State<Survey> {
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd12'),
           title: 'How many hours on average do you work per week?',
+          stepIdentifier: StepIdentifier(id: 'd12'),
+          title: 'How many hours on average do you work per week?',
           text:
               'Work in this context isn\'t necesarily salary based positions (e.g. voluntary work, tutoring, free-lancing, business, etc are applicable too.)',
           answerFormat: const ScaleAnswerFormat(
@@ -425,6 +564,8 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'd13'),
+          title: 'How many years of work experience do you have?',
           stepIdentifier: StepIdentifier(id: 'd13'),
           title: 'How many years of work experience do you have?',
           text:
@@ -440,6 +581,7 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd21'),
+          stepIdentifier: StepIdentifier(id: 'd21'),
           title: 'What is your monthly Income',
           text:
               'Please enter 0 if you currently don\'t have any sources of income',
@@ -450,6 +592,7 @@ class _SurveyState extends State<Survey> {
           isOptional: true,
         ),
         QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'd22'),
           stepIdentifier: StepIdentifier(id: 'd22'),
           title: 'How old are you?',
           answerFormat: const IntegerAnswerFormat(
@@ -471,6 +614,19 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'd23'),
+          title: 'What is your gender?',
+          isOptional: false,
+          answerFormat: const SingleChoiceAnswerFormat(
+            textChoices: [
+              TextChoice(text: 'Male', value: 'Male'),
+              TextChoice(text: 'Female', value: 'Female'),
+              TextChoice(text: 'Other', value: 'Other'),
+            ],
+          ),
+        ),
+        QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'd24'),
           stepIdentifier: StepIdentifier(id: 'd24'),
           title:
               'Which of the following was your High School Qualification Board?',
@@ -479,11 +635,14 @@ class _SurveyState extends State<Survey> {
             textChoices: [
               TextChoice(text: 'NTCB(English Version)', value: 'NTCB EV'),
               TextChoice(text: 'NTCB(Bangla Medium)', value: 'NTCB BM'),
+              TextChoice(text: 'NTCB(English Version)', value: 'NTCB EV'),
+              TextChoice(text: 'NTCB(Bangla Medium)', value: 'NTCB BM'),
               TextChoice(text: 'British Council', value: 'British Council'),
             ],
           ),
         ),
         QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'd25'),
           stepIdentifier: StepIdentifier(id: 'd25'),
           title: 'What is your major?',
           answerFormat: const TextAnswerFormat(
@@ -493,6 +652,7 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd26'),
+          stepIdentifier: StepIdentifier(id: 'd26'),
           title: 'What is you minor?',
           answerFormat: const TextAnswerFormat(
             maxLines: 5,
@@ -500,6 +660,7 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'd27'),
           stepIdentifier: StepIdentifier(id: 'd27'),
           title: 'How many credits have you completed till date?',
           answerFormat: const IntegerAnswerFormat(
@@ -509,6 +670,7 @@ class _SurveyState extends State<Survey> {
         ),
         QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd28'),
+          stepIdentifier: StepIdentifier(id: 'd28'),
           title:
               'How many credits does your program require in total for you to graduate?',
           answerFormat: const IntegerAnswerFormat(
@@ -517,6 +679,7 @@ class _SurveyState extends State<Survey> {
           isOptional: true,
         ),
         QuestionStep(
+          stepIdentifier: StepIdentifier(id: 'd29'),
           stepIdentifier: StepIdentifier(id: 'd29'),
           title: 'How many semesters have you completed so far?',
           answerFormat: const IntegerAnswerFormat(
