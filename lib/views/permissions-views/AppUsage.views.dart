@@ -1,13 +1,77 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'dart:io';
 
-class AppUsage extends StatefulWidget {
-  const AppUsage({super.key});
+import 'package:app_usage/app_usage.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:installed_apps/app_info.dart';
+import 'package:installed_apps/installed_apps.dart';
+
+class AppUsageData extends StatefulWidget {
+  final String data;
+
+  const AppUsageData({Key? key, required this.data}) : super(key: key);
 
   @override
-  State<AppUsage> createState() => _AppUsageState();
+  State<AppUsageData> createState() => _AppUsageState();
 }
 
-class _AppUsageState extends State<AppUsage> {
+class _AppUsageState extends State<AppUsageData> {
+  List<AppUsageInfo> _infos = [];
+
+  void getUsageStats() async {
+    // -------------------------------------AppUsage----------------------------------------------------
+    List<Object> dataCollected = [];
+
+    DateTime endDate = DateTime.now();
+    DateTime startDate = endDate.subtract(Duration(hours: 1440));
+    List<AppUsageInfo> infoList =
+        await AppUsage().getAppUsage(startDate, endDate);
+    setState(() => _infos = infoList);
+
+    for (var info in infoList) {
+      dataCollected
+          .add({"appName": info.appName, "usage": info.usage.toString()});
+    }
+
+    var bodys = json.encode({
+      'userId': widget.data,
+      'app_log': {"list": dataCollected}
+    });
+
+    var url = Uri.parse('http://127.0.0.1:8000/addAppUsageData/');
+
+    var resp = await http.post(url,
+        headers: {"Content-Type": "application/json"}, body: bodys);
+
+    print(resp.statusCode);
+// ----------------------------AppList-------------------------------------------------------------------
+    List<AppInfo> apps = await InstalledApps.getInstalledApps(true, true);
+
+    List<Object> applist = [];
+
+    for (var app in apps) {
+      applist.add({"appName": app.packageName});
+    }
+
+    bodys = json.encode({
+      'userId': widget.data,
+      'app_list': {"list": applist}
+    });
+
+    url = Uri.parse('http://127.0.0.1:8000/addSocialFpData/');
+
+    resp = await http.post(url,
+        headers: {"Content-Type": "application/json"}, body: bodys);
+
+    print(resp.statusCode);
+
+    Navigator.of(context).pushNamed(
+      '/phoneData',
+      arguments: widget.data,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +88,7 @@ class _AppUsageState extends State<AppUsage> {
           )),
           const Center(
             child: Text(
-              'App Usage',
+              "App Usage",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
@@ -54,7 +118,7 @@ class _AppUsageState extends State<AppUsage> {
             padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
             child: Center(
               child: FilledButton(
-                  onPressed: () {},
+                  onPressed: getUsageStats,
                   style: FilledButton.styleFrom(
                       backgroundColor: Color.fromARGB(188, 37, 51, 94)),
                   child: const Text('Give permissions')),

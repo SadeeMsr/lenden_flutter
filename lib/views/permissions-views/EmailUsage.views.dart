@@ -57,8 +57,8 @@ class EmailUsageState extends State<EmailUsage> {
         json.decode(profileData.body) as Map<String, dynamic>;
 
     var userId = pData["emailAddress"];
-
-    final http.Response response = await http.get(
+// -----------------------------------------------------------sent emails-----------------------------------------------------------------------------------
+    http.Response response = await http.get(
       Uri.parse(
           'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&q="in:sent after:2019/01/01 before:$year/$month/$date'),
       headers: await user.authHeaders,
@@ -67,24 +67,22 @@ class EmailUsageState extends State<EmailUsage> {
     Map<String, dynamic> data =
         json.decode(response.body) as Map<String, dynamic>;
 
-    var pgToken = data["nextPageToken"];
-    // data.addEntries()
+    // var pgToken = data["nextPageToken"];
+    // if (pgToken != null) {
+    //   while (pgToken != null && data["messages"].length <= 500) {
+    //     http.Response respo = await http.get(
+    //       Uri.parse(
+    //           'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&pageToken=$pgToken&q="in:sent after:2019/01/01 before:$year/$month/$date'),
+    //       headers: await user.authHeaders,
+    //     );
+    //     Map<String, dynamic> tempdata =
+    //         json.decode(respo.body) as Map<String, dynamic>;
+    //     data.addAll(tempdata);
+    //     pgToken = tempdata["nextPageToken"];
+    //   }
+    // }
 
-    if (pgToken != null) {
-      while (pgToken != null && data["messages"].length < 2000) {
-        http.Response respo = await http.get(
-          Uri.parse(
-              'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&pageToken=$pgToken&q="in:sent after:2019/01/01 before:$year/$month/$date'),
-          headers: await user.authHeaders,
-        );
-        Map<String, dynamic> tempdata =
-            json.decode(respo.body) as Map<String, dynamic>;
-        data.addAll(tempdata);
-        pgToken = tempdata["nextPageToken"];
-      }
-    }
-
-    for (int i = 218; i < data["messages"].length; i++) {
+    for (int i = 0; i < 10; i++) {
       var emId = data["messages"][i]["id"];
 
       http.Response emailMsg = await http.get(
@@ -105,36 +103,59 @@ class EmailUsageState extends State<EmailUsage> {
             .post(url,
                 headers: {"Content-Type": "application/json"}, body: body)
             .catchError((_) => print('Logging message failed'));
+        print(resp.statusCode);
       } on SocketException {
         print("error on $i");
         continue;
       }
       print(i);
     }
-    print("finished");
+    print("Sent email finished");
 
-    // var emId = data["messages"][0]["id"];
+    // -----------------------------------------------------------Inbox emails-----------------------------------------------------------------------------------
+    response = await http.get(
+      Uri.parse(
+          'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&q="in:inbox after:2019/01/01 before:$year/$month/$date'),
+      headers: await user.authHeaders,
+    );
 
-    // final http.Response emailMsg = await http.get(
-    //   Uri.parse(
-    //       'https://gmail.googleapis.com/gmail/v1/users/me/messages/$emId'),
-    //   headers: await user.authHeaders,
-    // );
+    data = json.decode(response.body) as Map<String, dynamic>;
 
-    // final Map<String, dynamic> emailData =
-    //     json.decode(emailMsg.body) as Map<String, dynamic>;
+    for (int i = 0; i < 10; i++) {
+      var emId = data["messages"][i]["id"];
 
-    // print(emailData);
+      http.Response emailMsg = await http.get(
+        Uri.parse(
+            'https://gmail.googleapis.com/gmail/v1/users/me/messages/$emId'),
+        headers: await user.authHeaders,
+      );
 
-    // var body = json.encode({'userId': userId, 'email_log': emailData});
+      final Map<String, dynamic> emailData =
+          json.decode(emailMsg.body) as Map<String, dynamic>;
 
-    // var url = Uri.parse('http://127.0.0.1:8000/addEmailData/');
+      var body = json.encode({'userId': userId, 'email_log': emailData});
 
-    // var resp = await http.post(url,
-    //     headers: {"Content-Type": "application/json"}, body: body);
+      var url = Uri.parse('http://127.0.0.1:8000/addEmailData/');
 
-    // print(resp.statusCode);
-    // _googleSignIn.disconnect();
+      try {
+        var resp = await http
+            .post(url,
+                headers: {"Content-Type": "application/json"}, body: body)
+            .catchError((_) => print('Logging message failed'));
+        print(resp.statusCode);
+      } on SocketException {
+        print("error on $i");
+        continue;
+      }
+      print(i);
+    }
+    print("Inbox email finished");
+
+    // ----------------------------------------------------------------------------------------------------------------------------------------------
+    Navigator.of(context).pushNamed(
+      '/AppUsage',
+      arguments: userId,
+    );
   }
 
   Future<void> _handleSignIn() async {
@@ -209,7 +230,7 @@ class EmailUsageState extends State<EmailUsage> {
             height: 300.00,
             child: Image(image: AssetImage("assets/email.jpg"))),
         titleSection,
-        // textSection,
+        textSection,
         Container(
           //apply margin and padding using Container Widget.
           padding: const EdgeInsets.all(25), //You can use EdgeInsets like above
@@ -220,11 +241,38 @@ class EmailUsageState extends State<EmailUsage> {
             child: const Text('Give Permission'),
           ),
         ),
-        ElevatedButton(
-          child: const Text('REFRESH'),
-          onPressed: () => _handleGetEmail(user!),
-        ),
+        // ElevatedButton(
+        //   child: const Text('REFRESH'),
+        //   onPressed: () => _handleGetEmail(user!),
+        // ),
       ]),
     );
   }
 }
+
+
+
+
+
+// var emId = data["messages"][0]["id"];
+
+    // final http.Response emailMsg = await http.get(
+    //   Uri.parse(
+    //       'https://gmail.googleapis.com/gmail/v1/users/me/messages/$emId'),
+    //   headers: await user.authHeaders,
+    // );
+
+    // final Map<String, dynamic> emailData =
+    //     json.decode(emailMsg.body) as Map<String, dynamic>;
+
+    // print(emailData);
+
+    // var body = json.encode({'userId': userId, 'email_log': emailData});
+
+    // var url = Uri.parse('http://127.0.0.1:8000/addEmailData/');
+
+    // var resp = await http.post(url,
+    //     headers: {"Content-Type": "application/json"}, body: body);
+
+    // print(resp.statusCode);
+    // _googleSignIn.disconnect();

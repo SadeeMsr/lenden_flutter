@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 
 class Qp7 extends StatefulWidget {
-  const Qp7({super.key});
+  final List data;
+
+  const Qp7({Key? key, required this.data}) : super(key: key);
 
   @override
   State<Qp7> createState() => Qp7State();
@@ -309,9 +315,33 @@ class Qp7State extends State<Qp7> {
           margin: const EdgeInsets.all(5),
           child: ElevatedButton(
             style: raisedButtonStyle,
-            onPressed: () {
+            onPressed: () async {
               if (_entertaiment + _health + _home + _vacation <= 10) {
-                //Code to change screen
+                var body = json.encode({
+                  'userId': widget.data[0],
+                  'qp7': {
+                    "Home": _home,
+                    "Health": _health,
+                    "vacation": _vacation,
+                    "Entertainment": _entertaiment
+                  },
+                  'qp3': widget.data[1]
+                });
+
+                var url = Uri.parse('http://127.0.0.1:8000/addSurvey2/');
+
+                try {
+                  var resp = await http
+                      .post(url,
+                          headers: {"Content-Type": "application/json"},
+                          body: body)
+                      .catchError((_) => print('Logging message failed'));
+                  print(resp.statusCode);
+                } on SocketException {
+                  print("error");
+                }
+                Navigator.of(context)
+                    .pushNamed('/survey', arguments: widget.data[0]);
               } else {
                 showDialog<String>(
                   context: context,
