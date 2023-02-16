@@ -40,7 +40,8 @@ class _SurveyState extends State<Survey> {
                     final json = result.toJson();
                     var body =
                         jsonEncode({'userId': widget.data, 'answers': json});
-                    var url = Uri.parse('http://127.0.0.1:8000/addSurvey/');
+                    var url = Uri.parse(
+                        'http://shababe.pythonanywhere.com/addSurvey/');
                     try {
                       var resp = await http
                           .post(url,
@@ -397,137 +398,6 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p6'),
-          title: 'You regularly Make new friends?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Strongly agree', value: '5'),
-              TextChoice(text: 'Agree', value: '4'),
-              TextChoice(text: 'Neutral', value: '3'),
-              TextChoice(text: 'Disagree', value: '2'),
-              TextChoice(text: 'Strongly disagree', value: '1'),
-            ],
-          ),
-        ),
-        QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p7'),
-          title:
-              'You spend a lot of your free time exploring various random topics that pique your interest?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Strongly agree', value: '5'),
-              TextChoice(text: 'Agree', value: '4'),
-              TextChoice(text: 'Neutral', value: '3'),
-              TextChoice(text: 'Disagree', value: '2'),
-              TextChoice(text: 'Strongly disagree', value: '1'),
-            ],
-          ),
-        ),
-        QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p8'),
-          title: 'You usually stay calm, even under a lot of pressure?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Strongly agree', value: '5'),
-              TextChoice(text: 'Agree', value: '4'),
-              TextChoice(text: 'Neutral', value: '3'),
-              TextChoice(text: 'Disagree', value: '2'),
-              TextChoice(text: 'Strongly disagree', value: '1'),
-            ],
-          ),
-        ),
-        QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p9'),
-          title:
-              'At social events, you rarely try to introduce yourself to new people and mostly talk to the ones you already know?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Strongly agree', value: '5'),
-              TextChoice(text: 'Agree', value: '4'),
-              TextChoice(text: 'Neutral', value: '3'),
-              TextChoice(text: 'Disagree', value: '2'),
-              TextChoice(text: 'Strongly disagree', value: '1'),
-            ],
-          ),
-        ),
-        QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p10'),
-          title:
-              'You prefer to completely finish one project before starting another?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Strongly agree', value: '5'),
-              TextChoice(text: 'Agree', value: '4'),
-              TextChoice(text: 'Neutral', value: '3'),
-              TextChoice(text: 'Disagree', value: '2'),
-              TextChoice(text: 'Strongly disagree', value: '1'),
-            ],
-          ),
-        ),
-        QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p11'),
-          title: 'You are very sentimental?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Strongly agree', value: '5'),
-              TextChoice(text: 'Agree', value: '4'),
-              TextChoice(text: 'Neutral', value: '3'),
-              TextChoice(text: 'Disagree', value: '2'),
-              TextChoice(text: 'Strongly disagree', value: '1'),
-            ],
-          ),
-        ),
-        QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p12'),
-          title: 'You like to use organizing tools like schedules and lists?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Strongly agree', value: '5'),
-              TextChoice(text: 'Agree', value: '4'),
-              TextChoice(text: 'Neutral', value: '3'),
-              TextChoice(text: 'Disagree', value: '2'),
-              TextChoice(text: 'Strongly disagree', value: '1'),
-            ],
-          ),
-        ),
-        QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p13'),
-          title:
-              'You feel comfortable just walking up to someone you find interesting and striking up a conversation ?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Strongly agree', value: '5'),
-              TextChoice(text: 'Agree', value: '4'),
-              TextChoice(text: 'Neutral', value: '3'),
-              TextChoice(text: 'Disagree', value: '2'),
-              TextChoice(text: 'Strongly disagree', value: '1'),
-            ],
-          ),
-        ),
-        QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'p14'),
-          title:
-              'You are not too interested in discussing various interpretations and analyses of creative works?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Strongly agree', value: '5'),
-              TextChoice(text: 'Agree', value: '4'),
-              TextChoice(text: 'Neutral', value: '3'),
-              TextChoice(text: 'Disagree', value: '2'),
-              TextChoice(text: 'Strongly disagree', value: '1'),
-            ],
-          ),
-        ),
-        QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd11'),
           title: 'How many dependents do you have?',
           text:
@@ -602,18 +472,6 @@ class _SurveyState extends State<Survey> {
           ),
         ),
         QuestionStep(
-          stepIdentifier: StepIdentifier(id: 'd23'),
-          title: 'What is your gender?',
-          isOptional: false,
-          answerFormat: const SingleChoiceAnswerFormat(
-            textChoices: [
-              TextChoice(text: 'Male', value: 'Male'),
-              TextChoice(text: 'Female', value: 'Female'),
-              TextChoice(text: 'Other', value: 'Other'),
-            ],
-          ),
-        ),
-        QuestionStep(
           stepIdentifier: StepIdentifier(id: 'd24'),
           title:
               'Which of the following was your High School Qualification Board?',
@@ -622,7 +480,6 @@ class _SurveyState extends State<Survey> {
             textChoices: [
               TextChoice(text: 'NTCB(English Version)', value: 'NTCB EV'),
               TextChoice(text: 'NTCB(Bangla Medium)', value: 'NTCB BM'),
-              TextChoice(text: 'NTCB(English Version)', value: 'NTCB EV'),
               TextChoice(text: 'NTCB(Bangla Medium)', value: 'NTCB BM'),
               TextChoice(text: 'British Council', value: 'British Council'),
             ],

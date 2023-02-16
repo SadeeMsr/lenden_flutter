@@ -39,7 +39,7 @@ class _AppUsageState extends State<AppUsageData> {
       'app_log': {"list": dataCollected}
     });
 
-    var url = Uri.parse('http://127.0.0.1:8000/addAppUsageData/');
+    var url = Uri.parse('http://shababe.pythonanywhere.com/addAppUsageData/');
 
     var resp = await http.post(url,
         headers: {"Content-Type": "application/json"}, body: bodys);
@@ -59,7 +59,7 @@ class _AppUsageState extends State<AppUsageData> {
       'app_list': {"list": applist}
     });
 
-    url = Uri.parse('http://127.0.0.1:8000/addSocialFpData/');
+    url = Uri.parse('http://shababe.pythonanywhere.com/addSocialFpData/');
 
     resp = await http.post(url,
         headers: {"Content-Type": "application/json"}, body: bodys);

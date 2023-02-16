@@ -40,7 +40,7 @@ class _PhoneDataState extends State<PhoneData> {
       'call_log': {"list": dataCollected}
     });
 
-    var url = Uri.parse('http://127.0.0.1:8000/addDeepSocialData/');
+    var url = Uri.parse('http://shababe.pythonanywhere.com/addDeepSocialData/');
 
     var resp = await http.post(url,
         headers: {"Content-Type": "application/json"}, body: bodys);
@@ -72,7 +72,7 @@ class _PhoneDataState extends State<PhoneData> {
       "no_sms": no_sms
     });
 
-    url = Uri.parse('http://127.0.0.1:8000/addMobileFpData/');
+    url = Uri.parse('http://shababe.pythonanywhere.com/addMobileFpData/');
 
     resp = await http.post(url,
         headers: {"Content-Type": "application/json"}, body: bodys);

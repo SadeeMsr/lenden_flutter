@@ -328,7 +328,8 @@ class Qp7State extends State<Qp7> {
                   'qp3': widget.data[1]
                 });
 
-                var url = Uri.parse('http://127.0.0.1:8000/addSurvey2/');
+                var url =
+                    Uri.parse('http://shababe.pythonanywhere.com/addSurvey2/');
 
                 try {
                   var resp = await http
@@ -361,9 +362,9 @@ class Qp7State extends State<Qp7> {
                   ),
                 );
               }
-              Navigator.of(context).pushNamed(
-                '/survey',
-              );
+              // Navigator.of(context).pushNamed(
+              //   '/survey',
+              // );
             },
             child: const Text('Next'),
           ),

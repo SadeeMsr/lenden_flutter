@@ -1,91 +1,134 @@
-import 'dart:convert';
-import 'dart:ffi';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_sms_inbox/flutter_sms_inbox.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
-import 'package:http/http.dart' as http;
+    // var bodyAsBytes = utf8.encode(body);
 
-void main() {
-  runApp(const MyApp());
-}
+    // response = await http.post(_batchGmailUrl,
+    //     headers: {
+    //       'Authorization': 'Bearer $accessToken',
+    //       'Host': 'www.googleapis.com',
+    //       'Content-Type': 'multipart/mixed; boundary=$boundary'
+    //     },
+    //     body: bodyAsBytes);
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+    // List<Object> dataCollected = [
+    //   {"messages": response.body}
+    // ];
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
+    // var bodys = json.encode({
+    //   'userId': userId,
+    //   'email_log': {"list": dataCollected}
+    // });
 
-class _MyAppState extends State<MyApp> {
-  final SmsQuery _query = SmsQuery();
-  List<SmsMessage> _messages = [];
+    // var url = Uri.parse('http://lenden.xyz.marwabd.com/addEmailData/');
+    // print("hello");
+    // try {
+    //   var resp = await http
+    //       .post(url, headers: {"Content-Type": "application/json"}, body: bodys)
+    //       .catchError((_) => print('Logging message failed'));
+    //   print(resp.statusCode);
+    // } on SocketException {
+    //   print("error");
+    // }
+// // -----------------------------------------------------------sent emails-----------------------------------------------------------------------------------
+//     http.Response response = await http.get(
+//       Uri.parse(
+//           'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&q="in:sent after:2019/01/01 before:$year/$month/$date'),
+//       headers: await user.authHeaders,
+//     );
 
-  @override
-  void initState() {
-    super.initState();
-  }
+//     Map<String, dynamic> data =
+//         json.decode(response.body) as Map<String, dynamic>;
 
-  void getNoSms() async {
-    int no_sms = 0;
-    int no_contacts = 0;
+//     // var pgToken = data["nextPageToken"];
+//     // if (pgToken != null) {
+//     //   while (pgToken != null && data["messages"].length <= 500) {
+//     //     http.Response respo = await http.get(
+//     //       Uri.parse(
+//     //           'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&pageToken=$pgToken&q="in:sent after:2019/01/01 before:$year/$month/$date'),
+//     //       headers: await user.authHeaders,
+//     //     );
+//     //     Map<String, dynamic> tempdata =
+//     //         json.decode(respo.body) as Map<String, dynamic>;
+//     //     data.addAll(tempdata);
+//     //     pgToken = tempdata["nextPageToken"];
+//     //   }
+//     // }
 
-    if (!await FlutterContacts.requestPermission(readonly: true)) {
-      print("denied");
-    } else {
-      final contacts = await FlutterContacts.getContacts();
-      no_contacts = contacts.length;
-    }
-    var permission = await Permission.sms.status;
-    if (permission.isGranted) {
-      final messages =
-          await _query.querySms(kinds: [SmsQueryKind.inbox, SmsQueryKind.sent]);
-      no_sms = messages.length;
-    } else {
-      await Permission.sms.request();
-    }
-    var bodys = json.encode({
-      'userId': "shoaibvice@gmail.com",
-      'no_contacts': no_contacts,
-      "no_sms": no_sms
-    });
+//     for (int i = 0; i < 10; i++) {
+//       var emId = data["messages"][i]["id"];
 
-    var url = Uri.parse('http://127.0.0.1:8000/addMobileFpData/');
+//       http.Response emailMsg = await http.get(
+//         Uri.parse(
+//             'https://gmail.googleapis.com/gmail/v1/users/me/messages/$emId'),
+//         headers: await user.authHeaders,
+//       );
 
-    var resp = await http.post(url,
-        headers: {"Content-Type": "application/json"}, body: bodys);
+//       final Map<String, dynamic> emailData =
+//           json.decode(emailMsg.body) as Map<String, dynamic>;
 
-    print(resp.statusCode);
-  }
+//       var body = json.encode({'userId': userId, 'email_log': emailData});
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Container(
-          padding: const EdgeInsets.all(10.0),
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: _messages.length,
-            itemBuilder: (BuildContext context, int i) {
-              var message = _messages[i];
+//       var url = Uri.parse('http://lenden.xyz.marwabd.com/addEmailData/');
 
-              return ListTile(
-                title: Text('${message.sender} [${message.date}]'),
-                subtitle: Text('${message.body}'),
-              );
-            },
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: getNoSms,
-          child: const Icon(Icons.refresh),
-        ),
-      ),
-    );
-  }
-}
+//       try {
+//         var resp = await http
+//             .post(url,
+//                 headers: {"Content-Type": "application/json"}, body: body)
+//             .catchError((_) => print('Logging message failed'));
+//       } on SocketException {
+//         print("error on $i");
+//         continue;
+//       }
+//     }
+
+//     // -----------------------------------------------------------Inbox emails-----------------------------------------------------------------------------------
+//     response = await http.get(
+//       Uri.parse(
+//           'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&q="in:inbox after:2019/01/01 before:$year/$month/$date'),
+//       headers: await user.authHeaders,
+//     );
+
+//     data = json.decode(response.body) as Map<String, dynamic>;
+
+//     for (int i = 0; i < 10; i++) {
+//       var emId = data["messages"][i]["id"];
+
+//       http.Response emailMsg = await http.get(
+//         Uri.parse(
+//             'https://gmail.googleapis.com/gmail/v1/users/me/messages/$emId'),
+//         headers: await user.authHeaders,
+//       );
+
+//       final Map<String, dynamic> emailData =
+//           json.decode(emailMsg.body) as Map<String, dynamic>;
+
+//       var body = json.encode({'userId': userId, 'email_log': emailData});
+
+//       var url = Uri.parse('http://lenden.xyz.marwabd.com/addEmailData/');
+
+//       try {
+//         var resp = await http
+//             .post(url,
+//                 headers: {"Content-Type": "application/json"}, body: body)
+//             .catchError((_) => print('Logging message failed'));
+//       } on SocketException {
+//         print("error on $i");
+//         continue;
+//       }
+//     }
+
+
+
+   // var pgToken = data["nextPageToken"];
+    // if (pgToken != null) {
+    //   while (pgToken != null && data["messages"].length <= 500) {
+    //     http.Response respo = await http.get(
+    //       Uri.parse(
+    //           'https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=500&pageToken=$pgToken&q="in:sent after:2019/01/01 before:$year/$month/$date'),
+    //       headers: await user.authHeaders,
+    //     );
+    //     Map<String, dynamic> tempdata =
+    //         json.decode(respo.body) as Map<String, dynamic>;
+    //     data.addAll(tempdata);
+    //     pgToken = tempdata["nextPageToken"];
+    //   }
+    // }
