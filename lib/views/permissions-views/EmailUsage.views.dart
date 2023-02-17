@@ -24,6 +24,7 @@ class EmailUsage extends StatefulWidget {
 }
 
 class EmailUsageState extends State<EmailUsage> {
+  bool tf = false;
 //-----------------Email data retrieval------------------------------------------------
   GoogleSignInAccount? _currentUser;
   var accessToken;
@@ -33,6 +34,7 @@ class EmailUsageState extends State<EmailUsage> {
     super.initState();
     _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount? account) {
       setState(() {
+        tf = true;
         _currentUser = account;
       });
       if (_currentUser != null) {
@@ -69,6 +71,8 @@ class EmailUsageState extends State<EmailUsage> {
     Map<String, dynamic> data =
         json.decode(response.body) as Map<String, dynamic>;
 
+    //  'https://gmail.googleapis.com/gmail/v1/users/me/messages/$emId?format=metadata'),
+
     final boundary = 'batch_email';
 
     String _gmailUrl = 'https://www.googleapis.com/gmail/v1/users/';
@@ -80,7 +84,11 @@ class EmailUsageState extends State<EmailUsage> {
     List<String> numL = [];
     for (var id in data["messages"]) {
       count++;
-      final messageUrl = '/gmail/v1/users/' + userId + '/messages/' + id["id"];
+      final messageUrl = '/gmail/v1/users/' +
+          userId +
+          '/messages/' +
+          id["id"] +
+          '?format=metadata';
 
       body += 'Content-Type: application/http\r\n';
       body += 'Content-ID: email:' + id["id"] + '\r\n\r\n';
@@ -96,6 +104,7 @@ class EmailUsageState extends State<EmailUsage> {
         numL.add(body);
       }
     }
+
     for (String s in numL) {
       var bodyAsBytes = utf8.encode(s);
 
@@ -139,7 +148,11 @@ class EmailUsageState extends State<EmailUsage> {
     numL = [];
     for (var id in data["messages"]) {
       count++;
-      final messageUrl = '/gmail/v1/users/' + userId + '/messages/' + id["id"];
+      final messageUrl = '/gmail/v1/users/' +
+          userId +
+          '/messages/' +
+          id["id"] +
+          '?format=metadata';
 
       body += 'Content-Type: application/http\r\n';
       body += 'Content-ID: email:' + id["id"] + '\r\n\r\n';
@@ -147,11 +160,11 @@ class EmailUsageState extends State<EmailUsage> {
       body += '--' + boundary + '\r\n';
 
       if (count == 99 && len >= 100) {
-        len = len - 99;
+        len = len - 100;
         count = 0;
         numL.add(body);
         body = '--' + boundary + '\r\n';
-      } else if (count < 100 && len == count) {
+      } else if (len > 0 && len < 100) {
         numL.add(body);
       }
     }
@@ -187,7 +200,12 @@ class EmailUsageState extends State<EmailUsage> {
         print("error");
       }
     }
-// -----------------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------Signing out----------------------------------------------------------------------------------
+
+    _googleSignIn.disconnect();
+
+// ----------------------------------------------------------------------------Changing screen-------------------------------------------------------------------------------
+
     Navigator.of(context).pushNamed(
       '/AppUsage',
       arguments: userId,
@@ -271,27 +289,53 @@ class EmailUsageState extends State<EmailUsage> {
             style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
         backgroundColor: const Color.fromARGB(255, 66, 87, 123),
       ),
-      body: Column(children: [
-        const SizedBox(
-            width: double.infinity,
-            height: 300.00,
-            child: Image(image: AssetImage("assets/email.jpg"))),
-        titleSection,
-        // textSection,
-        Container(
-          //apply margin and padding using Container Widget.
-          padding: const EdgeInsets.all(25), //You can use EdgeInsets like above
-          margin: const EdgeInsets.all(5),
-          child: ElevatedButton(
-            style: raisedButtonStyle,
-            onPressed: _handleSignIn,
-            child: const Text('Give Permission'),
+      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        if (tf == false) ...[
+          const SizedBox(
+              width: double.infinity,
+              height: 300.00,
+              child: Image(image: AssetImage("assets/email.jpg"))),
+          titleSection,
+          // textSection,
+          Container(
+            //apply margin and padding using Container Widget.
+            padding:
+                const EdgeInsets.all(25), //You can use EdgeInsets like above
+            margin: const EdgeInsets.all(5),
+            child: ElevatedButton(
+              style: raisedButtonStyle,
+              onPressed: _handleSignIn,
+              child: const Text('Give Permission'),
+            ),
           ),
-        ),
-        ElevatedButton(
-          child: const Text('REFRESH'),
-          onPressed: () => _googleSignIn.disconnect(),
-        ),
+          ElevatedButton(
+            child: const Text('REFRESH'),
+            onPressed: () => _googleSignIn.disconnect(),
+          ),
+        ] else ...[
+          const SizedBox(
+              width: double.infinity,
+              height: 300.00,
+              child: Image(image: AssetImage("assets/email.jpg"))),
+          const Align(
+            alignment: Alignment.center,
+            child: Text(
+              'Processing....',
+              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+            ),
+          ),
+          // const Center(child: Text("Collecting Data")),
+          const SimpleDialog(
+            elevation: 0.0,
+            backgroundColor:
+                Colors.transparent, // can change this to your prefered color
+            children: <Widget>[
+              Center(
+                child: CircularProgressIndicator(),
+              )
+            ],
+          )
+        ]
       ]),
     );
   }

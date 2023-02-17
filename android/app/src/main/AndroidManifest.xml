@@ -9,6 +9,8 @@
         <uses-permission android:name="android.permission.READ_CONTACTS"/>
         <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
         <uses-permission android:name="android.permission.INTERNET" />
+        <!-- added this new Access_Network_State -->
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
         <uses-permission android:name="android.permission.READ_SMS" />
    <application
         android:label="lenden"
@@ -40,5 +42,8 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- Added this new meta tag -->
+        <!-- <meta-data android:name="io.flutter.network-policy"
+        android:resource="@xml/network_security_config"/> -->
     </application>
 </manifest>

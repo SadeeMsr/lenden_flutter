@@ -17,17 +17,29 @@ class AppUsageData extends StatefulWidget {
 }
 
 class _AppUsageState extends State<AppUsageData> {
+  @override
+  void initState() {
+    super.initState();
+    getUsagePerm();
+  }
+
+  void getUsagePerm() async {
+    DateTime endDate = DateTime.now();
+    DateTime startDate = endDate.subtract(Duration(hours: 1440));
+    List<AppUsageInfo> infoList =
+        await AppUsage().getAppUsage(startDate, endDate);
+  }
+
   List<AppUsageInfo> _infos = [];
 
   void getUsageStats() async {
-    // -------------------------------------AppUsage----------------------------------------------------
+// -------------------------------------AppUsage----------------------------------------------------
     List<Object> dataCollected = [];
 
     DateTime endDate = DateTime.now();
     DateTime startDate = endDate.subtract(Duration(hours: 1440));
     List<AppUsageInfo> infoList =
         await AppUsage().getAppUsage(startDate, endDate);
-    setState(() => _infos = infoList);
 
     for (var info in infoList) {
       dataCollected
@@ -98,16 +110,7 @@ class _AppUsageState extends State<AppUsageData> {
           ),
           const Center(
             child: Text(
-                'This sections asks for permission to access your email activity? This will allow us to better understand your communication patterns and help us provide more personalized and efficient support. Rest assured that your privacy will be fully respected and all information will be kept confidential. Please let us know if you have any concerns or questions before granting access.',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 87, 85, 86),
-                  decorationThickness: 2.85,
-                ),
-                textAlign: TextAlign.justify),
-          ),
-          const Center(
-            child: Text(
-                'Rest assured that your privacy will be fully respected and all information will be kept confidential. Please let us know if you have any concerns or questions before granting access.',
+                'This sections asks for permission to access your App Usage data? This will allow us to better understand your behavioral patterns and help us provide more personalized and efficient support. Rest assured that your privacy will be fully respected and all information will be kept confidential. Please let us know if you have any concerns or questions before granting access.',
                 style: TextStyle(
                   color: Color.fromARGB(255, 87, 85, 86),
                   decorationThickness: 2.85,
@@ -115,15 +118,15 @@ class _AppUsageState extends State<AppUsageData> {
                 textAlign: TextAlign.justify),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 80, 0, 0),
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Center(
               child: FilledButton(
                   onPressed: getUsageStats,
                   style: FilledButton.styleFrom(
                       backgroundColor: Color.fromARGB(188, 37, 51, 94)),
-                  child: const Text('Give permissions')),
+                  child: const Text('Next')),
             ),
-          )
+          ),
         ],
       ),
     ));

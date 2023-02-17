@@ -419,10 +419,10 @@ class _SurveyState extends State<Survey> {
           answerFormat: const ScaleAnswerFormat(
             step: 1,
             minimumValue: 0,
-            maximumValue: 6,
-            defaultValue: 3,
+            maximumValue: 60,
+            defaultValue: 30,
             minimumValueDescription: '0',
-            maximumValueDescription: '6',
+            maximumValueDescription: '60',
           ),
         ),
         QuestionStep(
@@ -478,9 +478,8 @@ class _SurveyState extends State<Survey> {
           isOptional: false,
           answerFormat: const SingleChoiceAnswerFormat(
             textChoices: [
-              TextChoice(text: 'NTCB(English Version)', value: 'NTCB EV'),
-              TextChoice(text: 'NTCB(Bangla Medium)', value: 'NTCB BM'),
-              TextChoice(text: 'NTCB(Bangla Medium)', value: 'NTCB BM'),
+              TextChoice(text: 'NCTB(English Version)', value: 'NTCB EV'),
+              TextChoice(text: 'NCTB(Bangla Medium)', value: 'NTCB BM'),
               TextChoice(text: 'British Council', value: 'British Council'),
             ],
           ),
