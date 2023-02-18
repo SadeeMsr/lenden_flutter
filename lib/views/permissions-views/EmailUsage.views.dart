@@ -102,7 +102,6 @@ class EmailUsageState extends State<EmailUsage> {
         body = '--' + boundary + '\r\n';
       } else if (len > 0 && len < 100 && len == count) {
         numL.add(body);
-        body = '--' + boundary + '\r\n';
       }
     }
 
@@ -146,6 +145,7 @@ class EmailUsageState extends State<EmailUsage> {
     count = 0;
     len = data["messages"].length;
     numL = [];
+    body = '--' + boundary + '\r\n';
     for (var id in data["messages"]) {
       count++;
       final messageUrl = '/gmail/v1/users/' +
