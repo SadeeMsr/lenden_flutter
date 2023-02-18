@@ -96,11 +96,11 @@ class EmailUsageState extends State<EmailUsage> {
       body += '--' + boundary + '\r\n';
 
       if (count == 99 && len >= 100) {
-        len = len - 99;
+        len = len - 100;
         count = 0;
         numL.add(body);
         body = '--' + boundary + '\r\n';
-      } else if (count < 100 && len == count) {
+      } else if (len > 0 && len < 100) {
         numL.add(body);
       }
     }
