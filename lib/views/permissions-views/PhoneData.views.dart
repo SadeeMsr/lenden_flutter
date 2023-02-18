@@ -95,7 +95,7 @@ class _PhoneDataState extends State<PhoneData> {
         children: [
           Center(
               child: Image.asset(
-            'assets/images/gmail.png',
+            'assets/images/phone.png',
             height: 300,
             width: 300,
           )),

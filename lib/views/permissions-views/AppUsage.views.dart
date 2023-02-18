@@ -94,7 +94,7 @@ class _AppUsageState extends State<AppUsageData> {
         children: [
           Center(
               child: Image.asset(
-            'assets/images/gmail.png',
+            'assets/images/apps.png',
             height: 300,
             width: 300,
           )),

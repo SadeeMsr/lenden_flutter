@@ -52,7 +52,9 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: Icon(Icons.remove),
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.tealAccent,
+                child: const Icon(Icons.remove),
               ),
               const SizedBox(
                 width: 10,
@@ -69,7 +71,9 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: new Icon(Icons.add),
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.tealAccent,
+                child: const Icon(Icons.add),
               )
             ],
           ),
@@ -109,6 +113,8 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.tealAccent,
                 child: const Icon(Icons.remove),
               ),
               const SizedBox(
@@ -126,7 +132,9 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: new Icon(Icons.add),
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.tealAccent,
+                child: const Icon(Icons.add),
               )
             ],
           ),
@@ -166,7 +174,9 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: new Icon(Icons.remove),
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.tealAccent,
+                child: const Icon(Icons.remove),
               ),
               const SizedBox(
                 width: 10,
@@ -183,7 +193,9 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: new Icon(Icons.add),
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.tealAccent,
+                child: const Icon(Icons.add),
               )
             ],
           ),
@@ -223,7 +235,9 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: new Icon(Icons.remove),
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.tealAccent,
+                child: const Icon(Icons.remove),
               ),
               const SizedBox(
                 width: 10,
@@ -240,7 +254,9 @@ class Qp7State extends State<Qp7> {
                     });
                   }
                 },
-                child: Icon(Icons.add),
+                foregroundColor: Colors.black,
+                backgroundColor: Colors.tealAccent,
+                child: const Icon(Icons.add),
               )
             ],
           ),
