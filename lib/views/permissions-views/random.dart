@@ -1,4 +1,3 @@
-
     // var bodyAsBytes = utf8.encode(body);
 
     // response = await http.post(_batchGmailUrl,
