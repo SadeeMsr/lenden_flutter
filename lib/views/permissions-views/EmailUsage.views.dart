@@ -45,6 +45,7 @@ class EmailUsageState extends State<EmailUsage> {
   }
 
   Future<void> _handleGetEmail(GoogleSignInAccount user) async {
+    // _googleSignIn.disconnect();
     //Getting todays date ------------------
     DateTime now = DateTime.now();
     var date = now.day;
@@ -96,11 +97,13 @@ class EmailUsageState extends State<EmailUsage> {
       body += '--' + boundary + '\r\n';
 
       if (count == 99 && len >= 100) {
+        print(len.toString() + " sent");
         len = len - 100;
         count = 0;
         numL.add(body);
         body = '--' + boundary + '\r\n';
       } else if (len > 0 && len < 100 && len == count) {
+        print(len.toString() + " sent");
         numL.add(body);
       }
     }
@@ -160,11 +163,13 @@ class EmailUsageState extends State<EmailUsage> {
       body += '--' + boundary + '\r\n';
 
       if (count == 99 && len >= 100) {
+        print(len.toString() + " inbox");
         len = len - 100;
         count = 0;
         numL.add(body);
         body = '--' + boundary + '\r\n';
       } else if (len > 0 && len < 100 && len == count) {
+        print(len.toString() + " inbox");
         numL.add(body);
       }
     }
