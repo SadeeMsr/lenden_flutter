@@ -16,8 +16,30 @@ class PhoneData extends StatefulWidget {
 }
 
 class _PhoneDataState extends State<PhoneData> {
+  bool tf = true;
+  @override
+  void initState() {
+    super.initState();
+    getSmsPerm();
+  }
+
+  final SmsQuery _query = SmsQuery();
+
+  void getSmsPerm() async {
+    var permission = await Permission.sms.status;
+    if (permission.isGranted) {
+      final messages =
+          await _query.querySms(kinds: [SmsQueryKind.inbox, SmsQueryKind.sent]);
+    } else {
+      await Permission.sms.request();
+    }
+  }
+
   void getPhoneStats() async {
-    // --------------------------callLog------------------------------------------
+    setState(() {
+      tf = false;
+    });
+    // --------------------------Making callLog Data------------------------------------------
     List<Object> dataCollected = [];
     final Iterable<CallLogEntry> result = await CallLog.query();
 
@@ -32,24 +54,9 @@ class _PhoneDataState extends State<PhoneData> {
         "sim": entry.simDisplayName
       });
     }
-
-    print(dataCollected);
-
-    var bodys = json.encode({
-      'userId': widget.data,
-      'call_log': {"list": dataCollected}
-    });
-
-    var url = Uri.parse('http://shababe.pythonanywhere.com/addDeepSocialData/');
-
-    var resp = await http.post(url,
-        headers: {"Content-Type": "application/json"}, body: bodys);
-
-    print(resp.statusCode);
-// --------------------------MobileFp------------------------------------------
+// --------------------------Making MobileFP Data------------------------------------------
     int no_sms = 0;
     int no_contacts = 0;
-    final SmsQuery _query = SmsQuery();
 
     if (!await FlutterContacts.requestPermission(readonly: true)) {
       print("denied");
@@ -66,6 +73,21 @@ class _PhoneDataState extends State<PhoneData> {
     } else {
       await Permission.sms.request();
     }
+
+// --------------------------Sending Call Log------------------------------------------
+    var bodys = json.encode({
+      'userId': widget.data,
+      'call_log': {"list": dataCollected}
+    });
+
+    var url = Uri.parse('http://shababe.pythonanywhere.com/addDeepSocialData/');
+
+    var resp = await http.post(url,
+        headers: {"Content-Type": "application/json"}, body: bodys);
+
+    print(resp.statusCode);
+// --------------------------Sending MobileFp------------------------------------------
+
     bodys = json.encode(
         {'userId': widget.data, 'no_contacts': no_contacts, "no_sms": no_sms});
 
@@ -118,11 +140,15 @@ class _PhoneDataState extends State<PhoneData> {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
             child: Center(
-              child: FilledButton(
-                  onPressed: getPhoneStats,
-                  style: FilledButton.styleFrom(
-                      backgroundColor: Color.fromARGB(188, 37, 51, 94)),
-                  child: const Text('Give permissions')),
+              child: tf
+                  ? FilledButton(
+                      onPressed: getPhoneStats,
+                      style: FilledButton.styleFrom(
+                          backgroundColor: Color.fromARGB(188, 37, 51, 94)),
+                      child: const Text('Give permissions'))
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    ),
             ),
           )
         ],
@@ -130,16 +156,3 @@ class _PhoneDataState extends State<PhoneData> {
     ));
   }
 }
-
-
-//  void _fetchContacts() async {
-//     int no_contacts = 0;
-//     if (!await FlutterContacts.requestPermission(readonly: true)) {
-//       print("denied");
-//     } else {
-//       final contacts = await FlutterContacts.getContacts();
-//       no_contacts = contacts.length;
-//     }
-
-//     print(no_contacts);
-//   }

@@ -17,10 +17,11 @@ class AppUsageData extends StatefulWidget {
 }
 
 class _AppUsageState extends State<AppUsageData> {
+  bool tf = true;
   @override
   void initState() {
     super.initState();
-    getUsagePerm();
+    // getUsagePerm();
   }
 
   void getUsagePerm() async {
@@ -33,6 +34,9 @@ class _AppUsageState extends State<AppUsageData> {
   List<AppUsageInfo> _infos = [];
 
   void getUsageStats() async {
+    setState(() {
+      tf = false;
+    });
 // -------------------------------------AppUsage----------------------------------------------------
     List<Object> dataCollected = [];
 
@@ -120,11 +124,15 @@ class _AppUsageState extends State<AppUsageData> {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
             child: Center(
-              child: FilledButton(
-                  onPressed: getUsageStats,
-                  style: FilledButton.styleFrom(
-                      backgroundColor: Color.fromARGB(188, 37, 51, 94)),
-                  child: const Text('Next')),
+              child: tf
+                  ? FilledButton(
+                      onPressed: getUsageStats,
+                      style: FilledButton.styleFrom(
+                          backgroundColor: Color.fromARGB(188, 37, 51, 94)),
+                      child: const Text('Next'))
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    ),
             ),
           ),
         ],

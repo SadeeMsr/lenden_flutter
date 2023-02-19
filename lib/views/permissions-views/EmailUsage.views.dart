@@ -45,7 +45,6 @@ class EmailUsageState extends State<EmailUsage> {
   }
 
   Future<void> _handleGetEmail(GoogleSignInAccount user) async {
-    // _googleSignIn.disconnect();
     //Getting todays date ------------------
     DateTime now = DateTime.now();
     var date = now.day;
